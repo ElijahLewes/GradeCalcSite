@@ -169,29 +169,30 @@ function createCourse(){
     let recievedPoints = document.getElementById("recievedPoints");
     let activeAssignment = new Assignment(assignmentTitle.value, assignmentType.value,possiblePoints.value, recievedPoints.value);
     activeCourse.assignments.push(activeAssignment);
-    console.log(activeAssignments);
+    console.log(assignments);
     addAssignmentTable();
+
+    //CHECK FOR DUPLICATES
     //Clearing input
     //NOTE: do this for the other forms alsooo
     
-    assignmentTitle.value = '';
-    assignmentType.value = '';
-    possiblePoints.value = '';
-    recievedPoints.value = '';
+
 
     closeNewAssignment();
    }
 
 //ADD TO ASSIGNMENT TABLE
 function addAssignmentTable(){
+    var table = document.getElementById(addAssignmentTable);
     let assignmentTitle = document.getElementById("assignmentTitle").value;
     let assignmentType = document.getElementById("assignmentTypeSelect").value;
     let possiblePoints = document.getElementById("possiblePoints").value;
     let recievedPoints = document.getElementById("recievedPoints").value;
 
     if(assignmentTitle && assignmentType && possiblePoints && recievedPoints) {
-    const tableBody = document.getElementById("assignmentTable").getElementsByTagName("tbody")[0];
-    const newRow = document.createElement("tr");
+    const tableBody = table.getElementsByTagName('tbody')[0];
+  
+    const newRow = tableBody.createElement("tr");
     
     const cell1 = document.createElement("td");
     cell1.textContent = assignmentTitle;
