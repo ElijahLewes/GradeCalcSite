@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/3f21eecc32.js" crossorigin="anonymous"></script>
+        
+
+    </head>
+<body>
+
+    <h1> Grade Calculator</h1>
+
+    <div class="menu">
+    <!-- Add new class pop-up button and window -->
+    <button id="newClassButton" onclick="openPopup()">Create Course</button>
+
+    <!-- add class form hidden by default -->
+    <div id="overlay" class="overlay"></div>
+    <div class="popup" id="popup">
+       
+            <!-- close popup button -->
+            <div class="popupBar">
+            
+                <button type="button" id="closeFormButton" class="btn" onclick="closePopup()"><i class="fa-solid fa-circle-xmark"></i></button>
+           
+        </div>
+            <h2>Add a New Class</h2>
+            <form id="newClass">
+                <label for="className">Course Code:</label>
+                <input type="text" id="className" className="className" required>
+            </form>
+            <button id="submit" type="button" onclick="createCourse()">Create Course</button>
+
+            <div id="weightsPrompt">
+                <p>Use the + button to add assignment types and thier associated weights. You can probably find this information on your course syllabus.</p>
+            </div>
+            <button type="button" id="newAssignmentTypeButton" class="btn" onclick="openNewAssignmentType()">
+                <i class="fa-solid fa-square-plus"></i>
+            </button>
+            <div id="overlay" class="overlay"></div>
+            <div id="newAssignmentType">
+            <form id="addAssignmentType">
+                <label for="assignmentType">Assignment Category (homework, exams, etc.):</label>
+                <input type="text" id="assignmentType" assignmentType="assignmentType" required>
+
+                <label for="typeWeight">Assignment Category Weight (as a decimal):</label>
+                <input type="text" id="typeWeight" assignmentType="typeWeight" required>
+
+            </form>
+            <button id="submitAssignmentType" type="button" class="btn" onclick="closeNewAssignmentType();">Add Assignment Type</button>
+        </div>
+
+             <!-- SUBMIT CLASS FUNCTION -->
+             <button id="submit" type="button" onclick="submitNewClass()">Save Course</button>
+
+            
+    </div>
+    <div id="currentCourseInfo">
+
+    </div>
+
+
+
+    <button id="newAssignmentBtn" type="button" onclick="openNewAssignment()">Add Assignment</button>
+
+    <div id="addedCourses">
+
+    <div class=popup id="newAssignment">
+        <div class="popupBar">
+            
+            <button type="button" id="closeAssignmentButton" class="btn" onclick="closeNewAssignment()"><i class="fa-solid fa-circle-xmark"></i></button>
+        </div>
+        <div id="addAssignemnt">
+        <form>
+            <label for="assignmentTitle">Enter the name of the assignment:</label>
+            <input type="text" id="assignmentTitle" name="assignmentTitle">
+        <!-- Change this to multiple choice -->
+        
+            <label for="assignmentTypeSelect">What type of assignment was it?:</label>
+            <input type="text" id= "assignmentTypeSelect">
+                <!--Populate with Assignment type array-->
+       
+            <label for="possiblePoints">Enter the total possible points to recieve for this assignment:</label>
+            <input type="text" id="possiblePoints" name="possiblePoints">
+       
+            <label for="recievedPoints">Enter the total points you recieved for the assignment:</label>
+            <input type="text" id="recievedPoints" name="recievedPoints">
+        </form>
+        <button id="submitNewAssignmentBtn" type="button" onclick="submitNewAssignment()">Save Assignment</button>
+    </div>
+</div>
+     
+    <div id="finalGrade">
+        <p>Your final grade is: <span id="gradeResult"></span></p>
+    </div>
+
+ <div id="addedAssignments">
+
+    <!-- List of assignments added formatted as a table -->
+    <table id="assignmentTable">
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Assignment Name</th>
+                <th>Assignment Type</th>
+                <th>Possible Points</th>
+                <th>Points Recieved</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+
+
+        </tbody>
+    </table>
+ </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
+
+
+
+<!-- NOTES: Assignment table should have 'DELETE' button and 'Generate final grade' button -->

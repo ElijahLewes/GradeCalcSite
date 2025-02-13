@@ -1,0 +1,145 @@
+@font-face {
+    font-family:"Open_Dyslexic3";
+    src: url("fonts/OpenDyslexic3-Regular.ttf") format("truetype");
+}
+
+body{
+   font-family: "Open_Dyslexic3", sans-serif;
+   font-size: medium;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   align-items: center;
+
+}
+.assignmentTable {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+button {
+    margin-top: 10px;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+/* -----------Style for the pop-up add course form ------------*/
+.popup {
+    display: none;
+    font-size: 9pt;
+    width:40%; /* Initially hidden */
+    height: 50%;
+    background-color: rgb(145, 226, 241);
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #333;
+    z-index: 2; 
+    padding: 20px;
+    box-sizing: border-box;
+}
+.overlay {
+    display:none;
+    position: fixed; 
+    top: 0; 
+    left: 0;               
+    width: 100%;           
+    height: 100%;          
+    background-color: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(5px);
+    z-index: 1;            /* Sits below the popup (which will have a higher z-index) */
+    padding: 20px;
+}
+
+
+.popupBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: black;
+   
+}
+
+.btn{
+    padding: 5px;
+    outline: none;
+    cursor: pointer;
+    font-size: 12px;
+    float: left;
+ 
+}
+  
+
+/* Close button */
+#closeFormButton {
+   
+    color: white;
+    border: none;
+    cursor: pointer;
+    
+}
+
+#closeFormButton:hover {
+    color: red;
+}
+
+#weightsPrompt{
+    display: flex;
+    width: 90%;
+    padding: 5px;
+}
+
+/* -----------Style for the add Assignment weights pop-up form ------------*/
+#newAssignmentTypeButton{
+    display: flex;
+    padding: 5px;
+}
+
+#newAssignmentType {
+    display: none;
+    font-size: 9pt;
+    width:80%; /* Initially hidden */
+    height: 30%;
+    background-color: white;
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #333;
+    z-index: 4;
+}
+
+/* -----------Style for the add Assignments pop-up form ------------*/
+#newAssignmentBtn{
+    display: flex;
+    padding: 5px;
+}
+
+#newAssignment {
+   max-width: 500px;
+   min-width: 300px;
+}
+
+#addAssignment{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+form label, form input, form select{
+    display: block;
+    width: 90%;
+    padding: 10px;
+    
+}
