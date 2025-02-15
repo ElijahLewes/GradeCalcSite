@@ -14,7 +14,7 @@
 
     <div id="homePageMenu">
     <!-- Add new class pop-up button and window -->
-    <button id="newClassButton" onclick="openCreateCourse()">Create CourseBLAHBLACH</button>
+    <button id="newClassButton" onclick="openCreateCourse()">Create Course</button>
 
     <!-- blur rest of the page while menu is open -->
     <div id="overlay" class="overlay"></div>
@@ -28,12 +28,12 @@
            
              </div>
 
-            <h2>Add a New Course</h2>
+    
 
             <!-- Form to input new Course title -->
-            <form id="newClass">
-                <fieldset>
-                    <legend>Add a Course</legend>
+            <form id="newCourse">
+                <fieldset id="courseInfoFieldset">
+                    <legend><h2>Add a Course</h2></legend>
                     <label>Course Code (ex: AITC453):<br />
                         <input  type-"text" name="courseCode"/></label><br />
                  
@@ -46,22 +46,13 @@
                         <div id="addAssignmentTypeDiv">
                             
                         </div>
-
-
-
-
                     
                 </fieldset>
                
-                <input type="text" id="className" className="className" required>
-
-                <button id="submit" type="button" onclick="createCourse()">Create Course</button>
             </form>
 
             
-            <div id="weightsPrompt">
-                <p>Use the + button to add assignment types and thier associated weights. You can probably find this information on your course syllabus.</p>
-            </div>
+        
             
             <div id="overlay" class="overlay"></div>
             <div id="newAssignmentType">
