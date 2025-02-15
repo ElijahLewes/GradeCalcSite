@@ -28,7 +28,7 @@ button {
 }
 
 /* -----------Style for the pop-up add course form ------------*/
-.popup {
+.popupMenu {
     display: none;
     font-size: 9pt;
     width:40%; /* Initially hidden */

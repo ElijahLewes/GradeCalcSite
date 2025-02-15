@@ -44,8 +44,8 @@ class Assignment extends AssignmentType  {
 
 //Function to create new course object
 function createCourse(){
-    let classInput = document.getElementById("className"); // Get the input field
-    let courseCode = classInput.value.trim(); // Get the input value
+    let courseInput = document.getElementById("courseCode"); // Get the input field
+    let courseCode = courseInput.value.trim(); // Get the input value
     assignmentTypes = []; //resetting 
 
     activeCourse = new Course(courseCode, assignmentTypes, assignments, 0);
@@ -53,7 +53,7 @@ function createCourse(){
 }
 
     // Function to show the popup
-    function openPopup() {
+    function openCreateCourse() {
     document.getElementById("popup").style.display = "block";  
     document.getElementById("overlay").style.display = "block"; 
     }
@@ -77,10 +77,28 @@ function createCourse(){
 
     // Function to show the newAssignmentType
     function openNewAssignmentType() {
-    document.getElementById("newAssignmentType").style.display = "block"; 
-    document.getElementById("overlay").style.display = "block"; 
-    }
+    const addAssignmentTypeDiv = getElementById("addAssignmentTypeDiv");
 
+    const labelAssignmentType = document.createElement("label");
+        label.textContent = "Assignment Type (hw, quiz, assignemt, etc.):";
+    const inputAssignmentType = document.createElement("input");
+        inputAssignmentType.type = "text";
+        inputAssignmentType.id = "assignmentType";
+
+    const labelAssignmentWeight = document.createElement("label");
+        label.textContent = "Assignment type weight (as a decimal):";
+    const inputAssignmentWeight = document.createElement("input");
+        inputAssignmentWeight.type = "text";
+        inputAssignmentWeight.id = "assignmentWeight";
+
+    addAssignmentTypeDiv.appendChild(labelAssignmentType);
+    addAssignmentTypeDiv.appendChild(inputAssignmentType);
+    addAssignmentTypeDiv.appendChild(labelAssignmentWeight);
+    addAssignmentTypeDiv.appendChild(inputAssignmentWeight);
+    addAssignmentTypeDiv.appendChild(document.createElement("br"));
+
+    
+    
     //Function to add assignments
    function submitAssignmentType(){
     let assignmentType = document.getElementById("assignmentType");
@@ -234,4 +252,4 @@ function addAssignmentTable(){
 
 
 
-}
+}}
