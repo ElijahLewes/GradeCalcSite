@@ -3,12 +3,13 @@
     src: url("fonts/OpenDyslexic3-Regular.ttf") format("truetype");
 }
 
-body{
+.body{
    font-family: "Open_Dyslexic3", sans-serif;
    font-size: medium;
    flex-wrap: wrap;
    justify-content: space-between;
    align-items: center;
+   
 
 }
 .assignmentTable {
@@ -30,9 +31,10 @@ button {
 /* -----------Style for the pop-up add course form ------------*/
 .popupMenu {
     display: none;
+    flex-direction: column;
     font-size: 9pt;
-    width:40%; /* Initially hidden */
-    height: 50%;
+    width:80%; /* Initially hidden */
+    height: 80%;
     background-color: rgb(145, 226, 241);
     border-radius: 6px;
     position: absolute;
@@ -76,7 +78,7 @@ button {
     float: left;
  
 }
-  
+
 
 /* Close button */
 #closeFormButton {
@@ -91,55 +93,31 @@ button {
     color: red;
 }
 
-#weightsPrompt{
-    display: flex;
-    width: 90%;
-    padding: 5px;
-}
 
 /* -----------Style for the add Assignment weights pop-up form ------------*/
 #newAssignmentTypeButton{
     display: flex;
     padding: 5px;
 }
-
-#newAssignmentType {
-    display: none;
-    font-size: 9pt;
-    width:80%; /* Initially hidden */
-    height: 30%;
-    background-color: white;
-    border-radius: 6px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #333;
-    z-index: 4;
-}
-
-/* -----------Style for the add Assignments pop-up form ------------*/
-#newAssignmentBtn{
-    display: flex;
-    padding: 5px;
-}
-
-#newAssignment {
-   max-width: 500px;
-   min-width: 300px;
-}
-
-#addAssignment{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-form label, form input, form select{
+/*---User input in fieldset menus---*/
+#courseInfoFieldSet{
     display: block;
-    width: 90%;
-    padding: 10px;
+}
+.inputContainer {
+    display: flex;
+    
+    margin-bottom: 10px
+}
+
+.inputBox label {
+    flex: 1;
+    font-size: 12pt;
+    color: black;
     
 }
+
+.inputBox input {
+    flex: 1;
+}
+
+

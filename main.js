@@ -54,13 +54,13 @@ function createCourse(){
 
     // Function to show the popup
     function openCreateCourse() {
-    document.getElementById("createCourseMenu").style.display = "block";  
+    document.getElementById("createCourseMenu").style.display = "flex";  
     document.getElementById("overlay").style.display = "block"; 
     }
 
     // Function to close the popup
     function closePopup() {
-    document.getElementById("popup").style.display = "none";  
+    document.getElementById("createCourseMenu").style.display = "none";  
     document.getElementById("overlay").style.display = "none"; 
     }
 
@@ -72,33 +72,38 @@ function createCourse(){
         }
     }
 
-     
-// Function in new course popup to open form to add assignment types
-
-    // Function to show the newAssignmentType
+    // Function to get the newAssignmentType
     function openNewAssignmentType() {
-        const addAssignmentTypeDiv = document.querySelector("#newCourse #courseInfoFieldset #addAssignmentTypeDiv");
+    const addAssignmentTypeDiv = document.querySelector("#newCourse #courseInfoFieldset #addAssignmentTypeDiv");
 
+    const addAssignmentType =[
+        { label: "Assignment Type (hw, quiz, assignment, etc):", className: "inputBox", id: "assignmentTypeInput"},
+        { label: "Assignment type weight (as a decimal):", className: "inputBox", id: "assignmentWeightInput"}
 
-    const labelAssignmentType = document.createElement("label");
-        labelAssignmentType.textContent = "Assignment Type (hw, quiz, assignemt, etc.):";
-    const inputAssignmentType = document.createElement("input");
-        inputAssignmentType.type = "text";
-        inputAssignmentType.class = "assignmentType";
+    ]
+        addAssignmentType.forEach(assignmentType => {
+            const inputContainer = document.createElement("div");
+            inputContainer.className = "inputContainer";
 
-    const labelAssignmentWeight = document.createElement("label");
-        labelAssignmentWeight.textContent = "Assignment type weight (as a decimal):";
-    const inputAssignmentWeight = document.createElement("input");
-        inputAssignmentWeight.type = "text";
-        inputAssignmentWeight.class = "assignmentWeight";
+            const label = document.createElement("label");
+            label.textContent = assignmentType.label;
+            label.setAttribute("for", assignmentType.id);
 
-    addAssignmentTypeDiv.appendChild(labelAssignmentType);
-    addAssignmentTypeDiv.appendChild(inputAssignmentType);
-    addAssignmentTypeDiv.appendChild(labelAssignmentWeight);
-    addAssignmentTypeDiv.appendChild(inputAssignmentWeight);
-    addAssignmentTypeDiv.appendChild(document.createElement("br"));
-    }
-    
+            const input = document.createElement("input");
+            input.type = "text";
+            input.className = assignmentType.className;
+            input.id = assignmentType.id
+
+            inputContainer.appendChild(label);
+            inputContainer.appendChild(input);
+            addAssignmentTypeDiv.appendChild(inputContainer);
+            addAssignmentTypeDiv.appendChild(document.createElement('br'))
+        }
+        
+        )
+        console.log("Labels added:", document.querySelectorAll("label")); // Debugging check
+    };
+       
     
     //Function to add assignments
    function submitAssignmentType(){
@@ -113,16 +118,6 @@ function createCourse(){
     
    }
 
-    //Close popup if click outside of it without submitting assignment type
-    
-    window.onclick = function(event) {
-        var popup = document.getElementById('newAssignmentType');
-        var overlay = document.getElementById('overlay');
-        if (event.target == overlay) {
-            closeNewAssignmentType();
-            closePopup();
-        }
-    }
    
      //Function to submit new cou0-opp[;rse instance with associated weights
      function submitNewClass(){

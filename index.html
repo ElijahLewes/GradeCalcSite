@@ -28,14 +28,12 @@
            
              </div>
 
-    
-
             <!-- Form to input new Course title -->
             <form id="newCourse">
                 <fieldset id="courseInfoFieldset">
                     <legend><h2>Add a Course</h2></legend>
                     <label>Course Code (ex: AITC453):<br />
-                        <input  type-"text" name="courseCode"/></label><br />
+                        <input  type="text" name="courseCode"/></label><br />
                  
                         <!-- Add assignment type button. 
                          Add assignment type form innitiated by function.
@@ -54,16 +52,7 @@
             
         
             
-            <div id="overlay" class="overlay"></div>
-            <div id="newAssignmentType">
-            <form id="addAssignmentType">
-                <label for="assignmentType">Assignment Category (homework, exams, etc.):</label>
-                <input type="text" id="assignmentType" assignmentType="assignmentType" required>
 
-                <label for="typeWeight">Assignment Category Weight (as a decimal):</label>
-                <input type="text" id="typeWeight" assignmentType="typeWeight" required>
-
-            </form>
             <button id="submitAssignmentType" type="button" class="btn" onclick="closeNewAssignmentType();">Add Assignment Type</button>
         </div>
 
