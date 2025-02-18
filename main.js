@@ -1,9 +1,9 @@
 //Placeholder variables
 let courses = [];
-var activeCourse;
-var activeAssignmentType;
+var activeCourse = null;
+var activeAssignmentType = null;
 let assignmentTypes = [];
-var activeAssignment;
+var activeAssignment = null;
 var assignments = [];
 
 //----------------Class break down-----------------------//
@@ -42,23 +42,43 @@ class Assignment extends AssignmentType  {
 
 //ADDING CLASSES AND THEIR ASSIGNMENT TYPE WEIGHTS//
 
-//Function to create new course object
-function createCourse(){
-    let courseInput = document.getElementById("courseCode"); // Get the input field
-    let courseCode = courseInput.value.trim(); // Get the input value
-    assignmentTypes = []; //resetting 
 
-    activeCourse = new Course(courseCode, assignmentTypes, assignments, 0);
-    console.log(activeCourse);
-}
+//Function to display create course pop up 
 
-    // Function to show the popup
-    function openCreateCourse() {
+ function openCreateCourse() {
     document.getElementById("createCourseMenu").style.display = "flex";  
     document.getElementById("overlay").style.display = "block"; 
     }
 
-    // Function to close the popup
+//Function to create new course object with user input
+    function submitCourseID(){
+
+    let courseInput = document.getElementById("courseCode"); // Get the input field
+
+    //Check if courseCode = null
+        if(!courseInput){
+            // can add error box here
+            console.log("courseCode cannot be null.")
+        }
+    
+    // GFormat the input value
+    let courseCode = courseInput.value.trim();
+    
+    activeCourse = new Course(courseCode, assignmentTypes, assignments, 0);
+    console.log(activeCourse);
+    
+    //Display successful save message if element exists
+    let successfulSave = document.getElementById("successfulSave");
+    if (successfulSave) {
+        successfulSave.style.display = "flex";
+    } else {
+        console.log("Element with ID 'successfulSave' does not exist.");
+    }
+}
+
+
+
+    // Function to close the new course popup
     function closePopup() {
     document.getElementById("createCourseMenu").style.display = "none";  
     document.getElementById("overlay").style.display = "none"; 
@@ -72,7 +92,7 @@ function createCourse(){
         }
     }
 
-    // Function to get the newAssignmentType
+    // Function to get user input for the newAssignmentType
     function openNewAssignmentType() {
     const addAssignmentTypeDiv = document.querySelector("#newCourse #courseInfoFieldset #addAssignmentTypeDiv");
 
@@ -98,40 +118,53 @@ function createCourse(){
             inputContainer.appendChild(input);
             addAssignmentTypeDiv.appendChild(inputContainer);
             addAssignmentTypeDiv.appendChild(document.createElement('br'))
-        }
-        
-        )
-        console.log("Labels added:", document.querySelectorAll("label")); // Debugging check
+        })
+
     };
        
     
     //Function to add assignments
    function submitAssignmentType(){
-    let assignmentType = document.getElementById("assignmentType");
-    let typeWeight = document.getElementById("typeWeight");
+    let assignmentType = document.getElementById("assignmentTypeInput");
+    let typeWeight = document.getElementById("assignmentWeightInput");
+
+    
+
+    if (assignmentType == null || typeWeight == null) {
+        console.log("No assignment entered yet. Exiting submitAsssignmentType");
+        return;
+    }
+    
+    //Making sure input is save correcly
+    console.log("Assignment Type: " + assignmentType);
+    console.log("Type Weight: " + typeWeight);
+    
     let activeAssignmentType = new AssignmentType(activeCourse.courseCode, assignmentType.value, typeWeight.value);
-    assignmentTypes.push(activeAssignmentType);
     activeCourse.assignmentTypes.push(activeAssignmentType); 
     console.log(activeCourse.assignmentTypes);
 
-    //update course info on main page after changes
+    console.log("Active Course Assignment Types: ", activeCourse.assignmentTypes);
+    console.log("All Assignment Types: ", assignmentTypes);
+    //update course info on main page (prolly not here though)
     
    }
 
    
      //Function to submit new cou0-opp[;rse instance with associated weights
-     function submitNewClass(){
+     function submitNewCourse(){
+
         courses.push(activeCourse);
         console.log(courses);
+
+        
+        //Reset assignmentTypes and activeCourse container variables for next submission
+        activeAssignmentType = []; 
+        activeCourse = null;
+
         closePopup();
+
     }
-    // Function to close newAssignmentType
-    function closeNewAssignmentType() {
-        submitAssignmentType();
-        displayCourseInfo();
-        document.getElementById("newAssignmentType").style.display = "none"; 
-        document.getElementById("overlay").style.display = "none";
-    }    
+     
 
 //DISPLAYING CURRENT CLASS INFO
     function displayCourseInfo(){

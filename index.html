@@ -32,28 +32,31 @@
             <form id="newCourse">
                 <fieldset id="courseInfoFieldset">
                     <legend><h2>Add a Course</h2></legend>
-                    <label>Course Code (ex: AITC453):<br />
-                        <input  type="text" name="courseCode"/></label><br />
-                 
+                    <label>Course Code (ex: AITC453):</label>
+                        <input  type="text" id="courseCode"/><br><br/>
+                        <button type="button" id="saveCourseID" class="btn" onclick="submitCourseID()">Save Course ID</button>
                         <!-- Add assignment type button. 
                          Add assignment type form innitiated by function.
                         These assignment types should be associated with the course -->
-                        <button type="button" id="newAssignmentTypeButton" class="btn" onclick="openNewAssignmentType()">
-                            <i class="fa-solid fa-square-plus"></i>
-                        </button>
+                    <div id="successfulSave">
+                    <p>A new course ID has been saved. Use the + button to add assigent types and their associated weights. You can probably find this information on your syllabus.</p>
+                    </div>
                         <div id="addAssignmentTypeDiv">
+                           
                             
                         </div>
-                    
+                        <button type="button" id="newAssignmentTypeButton" class="btn" onclick="submitAssignmentType(); openNewAssignmentType()">
+                            <i class="fa-solid fa-square-plus"></i>
+                        </button>
                 </fieldset>
                
+               <!-- SUBMIT CLASS FUNCTION -->
+            <button id="submit" type="button" onclick="submitAssignmentType(); submitNewCourse()">Save Course</button>
+        
             </form>
 
             
-        
-            
 
-            <button id="submitAssignmentType" type="button" class="btn" onclick="closeNewAssignmentType();">Add Assignment Type</button>
         </div>
 
              <!-- SUBMIT CLASS FUNCTION -->
@@ -126,7 +129,7 @@
     </table>
  </div>
 
-    <script src="main.js"></script>
+    <script src="main.js" defer></script>
 </body>
 </html>
 

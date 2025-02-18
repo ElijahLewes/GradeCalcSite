@@ -79,6 +79,11 @@ button {
  
 }
 
+#successfulSave{
+    display: none;
+    align-items: center;
+}
+
 
 /* Close button */
 #closeFormButton {
