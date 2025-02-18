@@ -50,8 +50,36 @@ class Assignment extends AssignmentType  {
     document.getElementById("overlay").style.display = "block"; 
     }
 
+    // Function to close the new course popup and hide overlay
+    // ??have to click it twice the first time button is used on Add assignment??
+    function closePopup() {
+        let popupMenu = document.querySelectorAll('.popupMenu');
+    
+            popupMenu.forEach(menu =>{
+    
+                let exitBtn = menu.querySelector('.exitBtn');
+                exitBtn.addEventListener('click', function(){
+                menu.style.display = "none";
+                document.getElementById("overlay").style.display = "none"; 
+    
+                });
+            });
+        }
+    
+        //Function to close popup menu when overlay is clicked
+        window.onclick = function(event) {
+            var popup = document.getElementById('popup');
+            var overlay = document.getElementById('overlay');
+            if (event.target == overlay) {
+                closePopup();
+            }
+        }
+
+//------------CREATING A COURSE-------------------------------//
+
 //Function to create new course object with user input
     function submitCourseID(){
+        console.log("submitCourseID function called");
 
     let courseInput = document.getElementById("courseCode"); // Get the input field
 
@@ -69,28 +97,19 @@ class Assignment extends AssignmentType  {
     
     //Display successful save message if element exists
     let successfulSave = document.getElementById("successfulSave");
+    let pageHeader = document.getElementById("pageHeader");
     if (successfulSave) {
+        //display save message
         successfulSave.style.display = "flex";
+
+        //Change page header to reflect saved course
+        pageHeader.textContent = "Grade Calculater:" + activeCourse.courseCode;
+
     } else {
         console.log("Element with ID 'successfulSave' does not exist.");
     }
 }
 
-
-
-    // Function to close the new course popup
-    function closePopup() {
-    document.getElementById("createCourseMenu").style.display = "none";  
-    document.getElementById("overlay").style.display = "none"; 
-    }
-
-    window.onclick = function(event) {
-        var popup = document.getElementById('popup');
-        var overlay = document.getElementById('overlay');
-        if (event.target == overlay) {
-            closePopup();
-        }
-    }
 
     // Function to get user input for the newAssignmentType
     function openNewAssignmentType() {
@@ -122,49 +141,98 @@ class Assignment extends AssignmentType  {
 
     };
        
+//Submitting a new assignment type
+    function submitAssignmentType(){
+        let assignmentType = document.getElementById("assignmentTypeInput");
+        let typeWeight = document.getElementById("assignmentWeightInput");
     
-    //Function to add assignments
-   function submitAssignmentType(){
-    let assignmentType = document.getElementById("assignmentTypeInput");
-    let typeWeight = document.getElementById("assignmentWeightInput");
-
-    
-
-    if (assignmentType == null || typeWeight == null) {
-        console.log("No assignment entered yet. Exiting submitAsssignmentType");
-        return;
-    }
-    
-    //Making sure input is save correcly
-    console.log("Assignment Type: " + assignmentType);
-    console.log("Type Weight: " + typeWeight);
-    
-    let activeAssignmentType = new AssignmentType(activeCourse.courseCode, assignmentType.value, typeWeight.value);
-    activeCourse.assignmentTypes.push(activeAssignmentType); 
-    console.log(activeCourse.assignmentTypes);
-
-    console.log("Active Course Assignment Types: ", activeCourse.assignmentTypes);
-    console.log("All Assignment Types: ", assignmentTypes);
-    //update course info on main page (prolly not here though)
-    
-   }
-
-   
-     //Function to submit new cou0-opp[;rse instance with associated weights
-     function submitNewCourse(){
-
-        courses.push(activeCourse);
-        console.log(courses);
-
         
-        //Reset assignmentTypes and activeCourse container variables for next submission
-        activeAssignmentType = []; 
-        activeCourse = null;
-
-        closePopup();
-
+    
+        if (assignmentType == null || typeWeight == null) {
+            console.log("No assignment entered yet. Exiting submitAsssignmentType");
+            return;
+        }
+        
+        //Making sure input is save correcly
+        console.log("Assignment Type: " + assignmentType);
+        console.log("Type Weight: " + typeWeight);
+    
+        let activeAssignmentType = new AssignmentType(activeCourse.courseCode, assignmentType.value, typeWeight.value);
+        activeCourse.assignmentTypes.push(activeAssignmentType); 
+        console.log(activeCourse.assignmentTypes);
+    
+        console.log("Active Course Assignment Types: ", activeCourse.assignmentTypes);
+        console.log("All Assignment Types: ", assignmentTypes);
+        //update course info on main page (prolly not here though)
+        
+       }
+    
+       if (activeCourse) {
+        // Proceed with using activeCourse
+    } else {
+        console.log("activeCourse is not initialized yet.");
     }
-     
+
+//----------------ADDING ASSIGNMENTS-------------------------------//
+//ADDING ASSIGNMENTS AND DISPLAYING ASSIGNMENT LIST//
+function openNewAssignment(){
+    document.getElementById("newAssignment").style.display = "block";  
+    document.getElementById("overlay").style.display = "block"; 
+}
+
+function closeNewAssignment() {
+    document.getElementById("newAssignment").style.display = "none";  
+    document.getElementById("overlay").style.display = "none"; 
+    }
+
+// Function to populate possible assignment types based on previous input
+function selectAssignmentType() {
+    const assignmentTypeSelect = document.querySelector("#newAssignment #addAssignment #assignmentTypeSelect");
+
+    // Get all assignment type objects associated with the current course code
+    let typeObjects = activeCourse.assignmentTypes;
+    console.log(typeObjects);
+
+    // Get just assignment type values from AssignmentType objects
+    let typeOptions = typeObjects.map(obj => obj.assignmentType);
+    console.log(typeOptions);
+
+    // Append options to select element
+    typeOptions.forEach(typeOption => {
+        const option = document.createElement("option");
+        option.textContent = typeOption; 
+        option.setAttribute("value", typeOption);
+        assignmentTypeSelect.appendChild(option);  // Append the option to the select
+    });
+}
+
+
+    //Function to add assignments
+function submitNewAssignment(){
+    if (!activeCourse) {
+        console.log("No active course selected!");
+        return; // Stop if no course is active
+    }
+
+let assignmentTitle = document.getElementById("assignmentTitle").value;
+let assignmentType = document.getElementById("assignmentTypeSelect").value;
+let possiblePoints = document.getElementById("possiblePoints").value;
+let recievedPoints = document.getElementById("recievedPoints").value;
+let activeAssignment = new Assignment(assignmentTitle.value, assignmentType.value,possiblePoints.value, recievedPoints.value);
+activeCourse.assignments.push(activeAssignment);
+console.log(activeCourse.assignments);
+addAssignmentTable();
+
+//CHECK FOR DUPLICATES
+//Clearing input
+//NOTE: do this for the other forms alsooo
+
+
+
+closeNewAssignment();
+}
+
+
 
 //DISPLAYING CURRENT CLASS INFO
     function displayCourseInfo(){
@@ -196,37 +264,6 @@ class Assignment extends AssignmentType  {
 }
 
 
-//ADDING ASSIGNMENTS AND DISPLAYING ASSIGNMENT LIST//
-    function openNewAssignment(){
-        document.getElementById("newAssignment").style.display = "block";  
-        document.getElementById("overlay").style.display = "block"; 
-    }
-    
-    function closeNewAssignment() {
-        document.getElementById("newAssignment").style.display = "none";  
-        document.getElementById("overlay").style.display = "none"; 
-        }
-
-   
-        //Function to add assignments
-   function submitNewAssignment(){
-    let assignmentTitle = document.getElementById("assignmentTitle");
-    let assignmentType = document.getElementById("assignmentTypeSelect");
-    let possiblePoints = document.getElementById("possiblePoints");
-    let recievedPoints = document.getElementById("recievedPoints");
-    let activeAssignment = new Assignment(assignmentTitle.value, assignmentType.value,possiblePoints.value, recievedPoints.value);
-    activeCourse.assignments.push(activeAssignment);
-    console.log(assignments);
-    addAssignmentTable();
-
-    //CHECK FOR DUPLICATES
-    //Clearing input
-    //NOTE: do this for the other forms alsooo
-    
-
-
-    closeNewAssignment();
-   }
 
 //ADD TO ASSIGNMENT TABLE
 function addAssignmentTable(){

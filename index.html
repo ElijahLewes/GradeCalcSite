@@ -9,8 +9,8 @@
 
     </head>
 <body>
-
-    <h1> Grade Calculator</h1>
+    
+    <h1 id="pageHeader"> Grade Calculator</h1>
 
     <div id="homePageMenu">
     <!-- Add new class pop-up button and window -->
@@ -24,7 +24,7 @@
             <!-- close popup button -->
             <div class="popupBar">
             
-                <button type="button" id="closeFormButton" class="btn" onclick="closePopup()"><i class="fa-solid fa-circle-xmark"></i></button>
+                <button type="button" id="closeFormButton" class="exitBtn" onclick="closePopup()"><i class="fa-solid fa-circle-xmark"></i></button>
            
              </div>
 
@@ -51,17 +51,13 @@
                 </fieldset>
                
                <!-- SUBMIT CLASS FUNCTION -->
-            <button id="submit" type="button" onclick="submitAssignmentType(); submitNewCourse()">Save Course</button>
+            <button id="submitAssignmentTypes" type="exitBtn" onclick="submitAssignmentType(); closePopup()">Save Course</button>
         
             </form>
 
             
 
         </div>
-
-             <!-- SUBMIT CLASS FUNCTION -->
-             <button id="submit" type="button" onclick="submitNewClass()">Save Course</button>
-
             
     </div>
     <div id="currentCourseInfo">
@@ -70,24 +66,31 @@
 
 
 
-    <button id="newAssignmentBtn" type="button" onclick="openNewAssignment()">Add Assignment</button>
+    <button id="newAssignmentBtn" type="button" onclick="openNewAssignment(); selectAssignmentType()">Add Assignment</button>
 
     <div id="addedCourses">
 
-    <div class=popup id="newAssignment">
+    <div class=popupMenu id="newAssignment">
+        <!-- close popup button -->
         <div class="popupBar">
             
-            <button type="button" id="closeAssignmentButton" class="btn" onclick="closeNewAssignment()"><i class="fa-solid fa-circle-xmark"></i></button>
+            <button type="button" id="closeButton" class="exitBtn" onclick="closePopup()"><i class="fa-solid fa-circle-xmark"></i></button>
+       
         </div>
+       
         <div id="addAssignemnt">
         <form>
+
             <label for="assignmentTitle">Enter the name of the assignment:</label>
             <input type="text" id="assignmentTitle" name="assignmentTitle">
-        <!-- Change this to multiple choice -->
+        
         
             <label for="assignmentTypeSelect">What type of assignment was it?:</label>
-            <input type="text" id= "assignmentTypeSelect">
-                <!--Populate with Assignment type array-->
+            <select id="assignmentTypeSelect">
+
+            </select>
+        
+                <!--Populate with Assignment type array as a multiple choice-->
        
             <label for="possiblePoints">Enter the total possible points to recieve for this assignment:</label>
             <input type="text" id="possiblePoints" name="possiblePoints">
@@ -113,7 +116,7 @@
                 <th>Assignment Type</th>
                 <th>Possible Points</th>
                 <th>Points Recieved</th>
-            </tr>
+      .      </tr>
         </thead>
         <tbody id="tableBody">
             <tr>
